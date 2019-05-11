@@ -1,0 +1,91 @@
+jobs:
+  - name: deploy-dev
+    public: true
+    serial: true
+    plan:
+      - get: src-dev
+        trigger: true
+
+      - put: ns-dev
+        params:
+          sync_dir: src-dev/public/
+
+  - name: deploy-qa
+    public: true
+    serial: true
+    plan:
+      - get: src-qa
+        trigger: true
+
+      - put: ns-qa
+        params:
+          sync_dir: src-qa/public/
+
+  - name: deploy-prod
+    public: true
+    serial: true
+    plan:
+      - get: src-prod
+        trigger: true
+
+      - put: ns-prod
+        params:
+          sync_dir: src-prod/public/
+
+resource_types:
+  - name: rsync-resource
+    type: docker-image
+    source:
+        repository: mrsixw/concourse-rsync-resource
+        tag: latest
+
+resources:
+  - name: src-dev
+    public: true
+    type: git
+    source:
+      uri: git@github.com:ynohat/akamai-demo-site.git
+      branch: dev
+      private_key: ((github-deploy-key))
+
+  - name: ns-dev
+    type: rsync-resource
+    source:
+      server: ((ns_domain))
+      base_dir: /demo.a2s.ninja/dev.demo.a2s.ninja
+      user : sshacs
+      private_key: ((ns_key))
+
+  - name: src-qa
+    public: true
+    type: git
+    source:
+      uri: git@github.com:ynohat/akamai-demo-site.git
+      branch: qa
+      private_key: ((github-deploy-key))
+
+  - name: ns-qa
+    type: rsync-resource
+    source:
+      server: ((ns_domain))
+      base_dir: /demo.a2s.ninja/qa.demo.a2s.ninja
+      user : sshacs
+      private_key: ((ns_key))
+
+  - name: src-prod
+    public: true
+    type: git
+    source:
+      uri: git@github.com:ynohat/akamai-demo-site.git
+      branch: qa
+      private_key: ((github-deploy-key))
+
+  - name: ns-prod
+    type: rsync-resource
+    source:
+      server: ((ns_domain))
+      base_dir: /demo.a2s.ninja/prod.demo.a2s.ninja
+      user : sshacs
+      private_key: ((ns_key))
+
+
