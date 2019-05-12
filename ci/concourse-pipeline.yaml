@@ -5,12 +5,10 @@ jobs:
       - get: src-dev
         trigger: true
 
-      - get: src-ci
-
       - task: run-tests
         input_mapping:
           src: src-dev
-        file: src-ci/ci/tasks/test.yaml
+        file: src-dev/ci/tasks/test.yaml
 
   - name: deploy-dev
     public: true
@@ -19,8 +17,6 @@ jobs:
       - get: src-dev
         passed: [test-dev]
 
-      - get: src-ci
-
       - task: ns-dev
         params:
           ns_key: ((ns_key))
@@ -28,7 +24,7 @@ jobs:
           dest_dir: "demo.a2s.ninja/dev.demo.a2s.ninja/"
         input_mapping:
           src: src-dev
-        file: src-ci/ci/tasks/deploy.yaml
+        file: src-dev/ci/tasks/deploy.yaml
 
   - name: test-qa
     public: true
@@ -36,12 +32,10 @@ jobs:
       - get: src-qa
         trigger: true
 
-      - get: src-ci
-
       - task: run-tests
         input_mapping:
           src: src-qa
-        file: src-ci/ci/tasks/test.yaml
+        file: src-qa/ci/tasks/test.yaml
 
   - name: deploy-qa
     public: true
@@ -50,8 +44,6 @@ jobs:
       - get: src-qa
         passed: [test-qa]
 
-      - get: src-ci
-
       - task: ns-qa
         params:
           ns_key: ((ns_key))
@@ -59,7 +51,7 @@ jobs:
           dest_dir: "demo.a2s.ninja/qa.demo.a2s.ninja/"
         input_mapping:
           src: src-qa
-        file: src-ci/ci/tasks/deploy.yaml
+        file: src-qa/ci/tasks/deploy.yaml
 
   - name: test-prod
     public: true
@@ -67,12 +59,10 @@ jobs:
       - get: src-prod
         trigger: true
 
-      - get: src-ci
-
       - task: run-tests
         input_mapping:
           src: src-prod
-        file: src-ci/ci/tasks/test.yaml
+        file: src-prod/ci/tasks/test.yaml
 
 
   - name: deploy-prod
@@ -82,8 +72,6 @@ jobs:
       - get: src-prod
         passed: [test-prod]
 
-      - get: src-ci
-
       - task: ns-prod
         params:
           ns_key: ((ns_key))
@@ -91,7 +79,7 @@ jobs:
           dest_dir: "demo.a2s.ninja/prod.demo.a2s.ninja/"
         input_mapping:
           src: src-prod
-        file: src-ci/ci/tasks/deploy.yaml
+        file: src-prod/ci/tasks/deploy.yaml
 
 resources:
   - name: src-dev
@@ -116,12 +104,4 @@ resources:
     source:
       uri: git@github.com:ynohat/akamai-demo-site.git
       branch: qa
-      private_key: ((github-deploy-key))
-
-  - name: src-ci
-    public: true
-    type: git
-    source:
-      uri: git@github.com:ynohat/akamai-demo-site.git
-      branch: master
       private_key: ((github-deploy-key))
