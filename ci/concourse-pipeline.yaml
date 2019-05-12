@@ -7,6 +7,8 @@ jobs:
       - get: src-ci
 
       - task: run-tests
+        input_mapping:
+          src: src-dev
         file: src-ci/ci/tasks/test.yaml
 
   - name: deploy-dev
