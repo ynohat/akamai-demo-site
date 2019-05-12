@@ -1,0 +1,22 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: lukaszczerpak/akamai-devops-labs
+
+run:
+  path: sh
+  args:
+  - -exc
+  - |
+    echo "$edgerc" > .edgerc
+    akamai purge --section ${edgerc_section} --cpcode .edgerc invalidate --cpcode $cpcode
+
+params:
+  # Full contents of the .edgerc file.
+  edgerc:
+  # Section in the edgerc file to use.
+  edgerc_section:
+  cpcode:

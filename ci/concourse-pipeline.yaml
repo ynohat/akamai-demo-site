@@ -26,6 +26,22 @@ jobs:
           src: src-dev
         file: src-dev/ci/tasks/deploy.yaml
 
+  - name: purge-dev
+    public: true
+    serial: true
+    plan:
+      - get: src-dev
+        passed: [deploy-dev]
+
+      - task: ns-dev
+        params:
+          cpcode: ((cpcode))
+          edgerc: ((edgerc))
+          edgerc_section: ccu
+        input_mapping:
+          src: src-dev
+        file: src-dev/ci/tasks/purge.yaml
+
   - name: test-qa
     public: true
     plan:
@@ -52,6 +68,22 @@ jobs:
         input_mapping:
           src: src-qa
         file: src-qa/ci/tasks/deploy.yaml
+
+  - name: purge-qa
+    public: true
+    serial: true
+    plan:
+      - get: src-qa
+        passed: [deploy-qa]
+
+      - task: ns-qa
+        params:
+          cpcode: ((cpcode))
+          edgerc: ((edgerc))
+          edgerc_section: ccu
+        input_mapping:
+          src: src-qa
+        file: src-qa/ci/tasks/purge.yaml
 
   - name: test-prod
     public: true
@@ -80,6 +112,22 @@ jobs:
         input_mapping:
           src: src-prod
         file: src-prod/ci/tasks/deploy.yaml
+
+  - name: purge-prod
+    public: true
+    serial: true
+    plan:
+      - get: src-prod
+        passed: [deploy-prod]
+
+      - task: ns-prod
+        params:
+          cpcode: ((cpcode))
+          edgerc: ((edgerc))
+          edgerc_section: ccu
+        input_mapping:
+          src: src-prod
+        file: src-qa/ci/tasks/purge.yaml
 
 resources:
   - name: src-dev
