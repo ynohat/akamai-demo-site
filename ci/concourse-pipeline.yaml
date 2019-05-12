@@ -3,6 +3,7 @@ jobs:
     public: true
     plan:
       - get: src-dev
+        trigger: true
 
       - get: src-ci
 
@@ -17,7 +18,6 @@ jobs:
     plan:
       - get: src-dev
         passed: [test-dev]
-        trigger: true
 
       - get: src-ci
 
@@ -34,6 +34,7 @@ jobs:
     public: true
     plan:
       - get: src-qa
+        trigger: true
 
       - get: src-ci
 
@@ -48,7 +49,6 @@ jobs:
     plan:
       - get: src-qa
         passed: [test-qa]
-        trigger: true
 
       - get: src-ci
 
@@ -65,6 +65,7 @@ jobs:
     public: true
     plan:
       - get: src-prod
+        trigger: true
 
       - get: src-ci
 
@@ -80,7 +81,6 @@ jobs:
     plan:
       - get: src-prod
         passed: [test-prod]
-        trigger: true
 
       - get: src-ci
 
