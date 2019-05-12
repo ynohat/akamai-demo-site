@@ -36,7 +36,7 @@ resource_types:
   - name: rsync-resource
     type: docker-image
     source:
-        repository: mrsixw/concourse-rsync-resource
+        repository: ynohat/concourse-rsync-resource
         tag: latest
 
 resources:
@@ -55,6 +55,7 @@ resources:
       base_dir: /demo.a2s.ninja/dev.demo.a2s.ninja
       user : sshacs
       private_key: ((ns_key))
+      ssh_opts: -o HostKeyAlgorithm +ssh-dss -o PubkeyAcceptedKeyTypes +ssh-dss -o KexAlgorithms +diffie-hellman-group1-sha1
 
   - name: src-qa
     public: true
@@ -71,6 +72,7 @@ resources:
       base_dir: /demo.a2s.ninja/qa.demo.a2s.ninja
       user : sshacs
       private_key: ((ns_key))
+      ssh_opts: -o HostKeyAlgorithm +ssh-dss -o PubkeyAcceptedKeyTypes +ssh-dss -o KexAlgorithms +diffie-hellman-group1-sha1
 
   - name: src-prod
     public: true
@@ -87,5 +89,6 @@ resources:
       base_dir: /demo.a2s.ninja/prod.demo.a2s.ninja
       user : sshacs
       private_key: ((ns_key))
+      ssh_opts: -o HostKeyAlgorithm +ssh-dss -o PubkeyAcceptedKeyTypes +ssh-dss -o KexAlgorithms +diffie-hellman-group1-sha1
 
 
