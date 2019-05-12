@@ -16,6 +16,7 @@ jobs:
     plan:
       - get: src-dev
         passed: [test-dev]
+        trigger: true
 
       - task: ns-dev
         params:
@@ -32,6 +33,7 @@ jobs:
     plan:
       - get: src-dev
         passed: [deploy-dev]
+        trigger: true
 
       - task: ns-dev
         params:
