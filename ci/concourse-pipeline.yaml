@@ -60,6 +60,7 @@ jobs:
     serial: true
     plan:
       - get: src-qa
+        trigger: true
         passed: [test-qa]
 
       - task: ns-qa
@@ -76,6 +77,7 @@ jobs:
     serial: true
     plan:
       - get: src-qa
+        trigger: true
         passed: [deploy-qa]
 
       - task: ns-qa
@@ -104,6 +106,7 @@ jobs:
     serial: true
     plan:
       - get: src-prod
+        trigger: true
         passed: [test-prod]
 
       - task: ns-prod
@@ -120,6 +123,7 @@ jobs:
     serial: true
     plan:
       - get: src-prod
+        trigger: true
         passed: [deploy-prod]
 
       - task: ns-prod
