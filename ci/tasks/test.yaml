@@ -6,8 +6,8 @@ image_resource:
   source:
     repository: busybox
 
-inputs:
-  - name: akamai-pipeline
+input:
+  - name: src
 
 run:
   path: true
