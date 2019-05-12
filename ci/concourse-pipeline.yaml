@@ -152,6 +152,19 @@ jobs:
           src: src-prod
         file: src-prod/ci/tasks/add-mpulse-annotation.yaml
 
+  - name: load-test
+    public: true
+    serial: true
+    plan:
+      - get: src-prod
+        trigger: true
+        passed: [deploy-prod, purge-prod, add-mpulse-annotation]
+
+      - task: add-mpulse-annotation
+        params:
+          url: http://prod.demo.a2s.ninja/index.html
+        file: src-prod/ci/tasks/load-test.yaml
+
 resources:
   - name: src-dev
     public: true

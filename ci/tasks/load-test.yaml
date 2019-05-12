@@ -1,0 +1,14 @@
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: yokogawa/siege
+params:
+  url:
+run:
+  path: siege
+  args: [
+    -t, 5m,
+    -c, 10,
+    ((url))
+  ]
