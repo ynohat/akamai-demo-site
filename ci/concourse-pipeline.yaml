@@ -133,7 +133,7 @@ jobs:
           edgerc_section: ccu
         input_mapping:
           src: src-prod
-        file: src-qa/ci/tasks/purge.yaml
+        file: src-prod/ci/tasks/purge.yaml
 
 resources:
   - name: src-dev
