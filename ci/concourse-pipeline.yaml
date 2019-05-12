@@ -152,20 +152,45 @@ jobs:
           src: src-prod
         file: src-prod/ci/tasks/add-mpulse-annotation.yaml
 
+  - name: perf-report
+    public: true
+    serial: true
+    plan:
+      - get: src-prod
+        trigger: true
+        passed: [deploy-prod]
+
+      - task: generate
+        file: src-prod/ci/tasks/test.yaml
+
+      - put: slack
+        params:
+          text: "Performance report available"
+
   - name: load-test
     public: true
     serial: true
     plan:
       - get: src-prod
         trigger: true
-        passed: [deploy-prod, purge-prod]
+        passed: [purge-prod]
 
-      - task: load-test
+      - task: run
         vars:
           url: http://prod.demo.a2s.ninja/index.html
           concurrency: 2
           duration: 1m
         file: src-prod/ci/tasks/load-test.yaml
+
+      - put: slack
+        params:
+          text_file: output/log
+
+resource_types:
+  - name: slack-notification
+    type: docker-image
+    source:
+      repository: cfcommunity/slack-notification-resource
 
 resources:
   - name: src-dev
@@ -191,3 +216,8 @@ resources:
       uri: git@github.com:ynohat/akamai-demo-site.git
       branch: qa
       private_key: ((github-deploy-key))
+
+  - name: slack
+    type: slack-notification
+    source:
+      url: ((slack_webhook))
