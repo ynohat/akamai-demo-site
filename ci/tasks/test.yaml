@@ -6,8 +6,5 @@ image_resource:
   source:
     repository: busybox
 
-inputs:
-  - name: src
-
 run:
   path: true
