@@ -13,6 +13,7 @@ run:
   - |
     echo "$edgerc" > .edgerc
     akamai purge --section ${edgerc_section} --edgerc .edgerc invalidate --cpcode $cpcode
+    sleep 10
 
 params:
   # Full contents of the .edgerc file.
