@@ -158,11 +158,13 @@ jobs:
     plan:
       - get: src-prod
         trigger: true
-        passed: [deploy-prod, purge-prod, add-mpulse-annotation]
+        passed: [deploy-prod, purge-prod]
 
-      - task: add-mpulse-annotation
-        params:
+      - task: load-test
+        vars:
           url: http://prod.demo.a2s.ninja/index.html
+          concurrency: 2
+          duration: 1m
         file: src-prod/ci/tasks/load-test.yaml
 
 resources:
