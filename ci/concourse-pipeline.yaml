@@ -214,7 +214,7 @@ resources:
     type: git
     source:
       uri: git@github.com:ynohat/akamai-demo-site.git
-      branch: qa
+      branch: prod
       private_key: ((github-deploy-key))
 
   - name: slack
