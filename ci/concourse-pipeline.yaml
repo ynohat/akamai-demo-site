@@ -196,6 +196,7 @@ resources:
   - name: src-dev
     public: true
     type: git
+    check_every: 5s
     source:
       uri: git@github.com:ynohat/akamai-demo-site.git
       branch: dev
@@ -204,6 +205,7 @@ resources:
   - name: src-qa
     public: true
     type: git
+    check_every: 5s
     source:
       uri: git@github.com:ynohat/akamai-demo-site.git
       branch: qa
@@ -212,6 +214,7 @@ resources:
   - name: src-prod
     public: true
     type: git
+    check_every: 5s
     source:
       uri: git@github.com:ynohat/akamai-demo-site.git
       branch: prod
@@ -219,5 +222,6 @@ resources:
 
   - name: slack
     type: slack-notification
+    check_every: 5s
     source:
       url: ((slack_webhook))
