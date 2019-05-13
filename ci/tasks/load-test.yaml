@@ -12,6 +12,6 @@ run:
   args: [
     -t, ((duration)),
     -c, ((concurrency)),
-    -l, output/log,
+    -l, ./output/log,
     ((url))
   ]
