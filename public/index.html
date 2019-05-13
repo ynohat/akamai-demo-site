@@ -3,43 +3,67 @@
 <head>
     <title>Akamai for DevOps</title>
     <style>
-        html {
-            width: 800px;
-            height: 800px;
+        :root {
+            --gradient-1: rgba(255, 175, 75, 1);
+            --gradient-2: rgba(232, 128, 0, 1);
+
+
+            /* --gradient-1: rgba(2, 175, 75, 1);
+            --gradient-2: rgba(2, 128, 0, 1); */
         }
-        html, body {position: relative;}
+
+        html, body {position: relative;width: 100%; height: 100%;}
         body {
             width: 100%; height: 100%;
             background: rgba(255, 175, 75, 2);
-            background: -moz-linear-gradient(45deg, rgba(255, 175, 75, 1) 0%, rgba(232, 128, 0, 1) 100%);
-            background: -webkit-gradient(left bottom, right top, color-stop(0%, rgba(255, 175, 75, 1)), color-stop(100%, rgba(232, 128, 0, 1)));
-            background: -webkit-linear-gradient(45deg, rgba(255, 175, 75, 1) 0%, rgba(232, 128, 0, 1) 100%);
-            background: -o-linear-gradient(45deg, rgba(255, 175, 75, 1) 0%, rgba(232, 128, 0, 1) 100%);
-            background: -ms-linear-gradient(45deg, rgba(255, 175, 75, 1) 0%, rgba(232, 128, 0, 1) 100%);
-            background: linear-gradient(45deg, rgba(255, 175, 75, 1) 0%, rgba(232, 128, 0, 1) 100%);
-            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#ffaf4b', endColorstr='#e88000', GradientType=1);
+            background: -moz-linear-gradient(45deg, var(--gradient-1) 0%, var(--gradient-2) 100%);
+            background: -webkit-gradient(left bottom, right top, color-stop(0%, var(--gradient-1)), color-stop(100%, var(--gradient-2)));
+            background: -webkit-linear-gradient(45deg, var(--gradient-1) 0%, var(--gradient-2) 100%);
+            background: -o-linear-gradient(45deg, var(--gradient-1) 0%, var(--gradient-2) 100%);
+            background: -ms-linear-gradient(45deg, var(--gradient-1) 0%, var(--gradient-2) 100%);
+            background: linear-gradient(45deg, var(--gradient-1) 0%, var(--gradient-2) 100%);
             display: flex;
             flex-direction: column;
             align-content: center;
             justify-content: center;
+            align-items: center;
         }
-        
+
+        div.wrapper {
+            width: 600px;
+            height: 600px;
+            display: flex;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+        }        
+
         p {
             color: white;
-            font-size: 48pt;
+            font-size: 32px;
             font-family: sans-serif;
             text-align: center;
         }
-        
-        p.domain {
-            font-size: 42pt;
+
+        p.subtitle {
+            font-size: 28px;
         }
     </style>
 </head>
 
 <body>
-    <p class="logo"><img width="500" src="logo.png"></p>
-    <p class="date">Welcome to the Edge</p>
+    <div class="wrapper">
+        <p class="logo"><img style="height: 100px" src="logo.png"></p>
+        <p class="subtitle">HOSTNAME</p>
+    </div>
+
+    <script>
+        var st = document.querySelector('.subtitle');
+        st.innerHTML = st.innerHTML.replace('HOSTNAME', location.hostname || 'example.com');
+    </script>
 </body>
 
 </html>
+
