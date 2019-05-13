@@ -63,9 +63,18 @@
             cursor: pointer;
         }
 </style>
+
+<script>
+    function refreshSoon() {
+        setTimeout(function () {
+            location.reload();
+        }, 1000);
+    }
+</script>
+
 </head>
 
-<body>
+<body onload="refreshSoon()">
     <div class="wrapper">
         <p class="logo"><img style="height: 60px" src="logo.png"></p>
         <p class="subtitle">HOSTNAME</p>
