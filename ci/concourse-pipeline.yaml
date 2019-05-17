@@ -196,27 +196,27 @@ resources:
   - name: src-dev
     public: true
     type: git
-    check_every: 5s
+    check_every: 10s
     source:
-      uri: git@github.com:ynohat/akamai-demo-site.git
+      uri: ssh://git@github.com/ynohat/akamai-demo-site.git
       branch: dev
       private_key: ((github-deploy-key))
 
   - name: src-qa
     public: true
     type: git
-    check_every: 5s
+    check_every: 10s
     source:
-      uri: git@github.com:ynohat/akamai-demo-site.git
+      uri: ssh://git@github.com/ynohat/akamai-demo-site.git
       branch: qa
       private_key: ((github-deploy-key))
 
   - name: src-prod
     public: true
     type: git
-    check_every: 5s
+    check_every: 10s
     source:
-      uri: git@github.com:ynohat/akamai-demo-site.git
+      uri: ssh://git@github.com/ynohat/akamai-demo-site.git
       branch: prod
       private_key: ((github-deploy-key))
 
