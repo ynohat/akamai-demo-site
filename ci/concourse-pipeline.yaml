@@ -207,7 +207,7 @@ resources:
     type: git
     check_every: 10s
     source:
-      uri: ssh://git@github.com/ynohat/akamai-demo-site.git
+      uri: ssh://git@ssh.github.com:443/ynohat/akamai-demo-site.git
       branch: qa
       private_key: ((github-deploy-key))
 
@@ -216,11 +216,12 @@ resources:
     type: git
     check_every: 10s
     source:
-      uri: ssh://git@github.com/ynohat/akamai-demo-site.git
+      uri: ssh://git@ssh.github.com:443/ynohat/akamai-demo-site.git
       branch: prod
       private_key: ((github-deploy-key))
 
   - name: slack
+    public: true
     type: slack-notification
     check_every: 5s
     source:
